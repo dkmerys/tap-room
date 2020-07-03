@@ -6,6 +6,7 @@ class KegControl extends React.Component {
     this.state = {
       formVisibleOnPage: false,
       selectedKeg: null,
+      editing: false,
       kegList: [
         {
           name: 'Hayduke Helles',
@@ -53,6 +54,49 @@ class KegControl extends React.Component {
           id: "4"
         }
       ]
+    }
+  };
+
+  handleClick = () => {
+    if (this.state.selectedKeg !== null) {
+      this.setState({
+        formVisibleOnPage: false,
+        selectedKeg: null,
+        editing: false
+      })
+    } else {
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage
+      }));
+    }
+  }
+
+  handleAddingNewKegToList = (newKeg) => {
+    const newKegList = this.state.kegList.concat(newKeg);
+    this.setState({kegList: newKegList,
+                  formVisibleOnPage: false})
+  }
+
+  handleChangingSelectedKeg = (id) => {
+    const selectedKeg = this.state.kegList.filter(keg => keg.id === id)[0];
+    this.setState({selectedKeg: selectedKeg});
+  }
+
+  handleDeletingKeg = (id) => {
+    const newKegList = this.state.kegList.filter(keg => keg.id === id)[0];
+    this.setState({
+      kegList: newKegList,
+      selectedKeg: null
+    });
+  }
+
+
+  render() {
+    let currentlyVisibleState = null;
+    let buttonText = null;
+
+    if (this.state.selectedItem !== null) {
+      currentlyVisibleState = <NewKegForm
     }
   }
 }
