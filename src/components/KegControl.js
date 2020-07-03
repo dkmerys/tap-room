@@ -90,6 +90,43 @@ class KegControl extends React.Component {
     });
   }
 
+  handleEditClick = () => {
+    this.setState({editing: true});
+  }
+
+  handleEditingKegInList = (kegToEdit) => {
+    const editedKegList = this.state.kegList
+                          .filter(keg => keg.id !== this.state.selectedKeg.id)
+                          .concat(kegToEdit);
+    this.setState({
+      kegList: editedKegList,
+      editing: false,
+      selectedKeg: null
+    });
+  }
+
+  handleBuyingKeg = (id) => {
+    const purchasedKeg = this.state.kegList.filter(keg => keg.id === id)[0];
+    purchasedKeg.quantity -= 1;
+    const editedKegList = this.state.kegList
+                          .filter(keg => keg.id !== this.state.selectedKeg.id)
+                          .concat(purchasedKeg);
+    this.setState({
+      kegList: editedKegList
+    });
+  }
+
+  handleReplacingKeg = (id) => {
+    const replacedKeg = this.state.kegList.filter(keg => keg.id === id)[0];
+    replacedKeg.quantity = 124;
+    const editedKegList = this.state.kegList
+                          .filter(keg => keg.id !=== this.state.selectedKeg.id)
+                          .concat(replacedKeg);
+    this.setState({
+      kegList: editedKegList
+    });
+  }
+
 
   render() {
     let currentlyVisibleState = null;
