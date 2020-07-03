@@ -121,7 +121,7 @@ class KegControl extends React.Component {
     const replacedKeg = this.state.kegList.filter(keg => keg.id === id)[0];
     replacedKeg.quantity = 124;
     const editedKegList = this.state.kegList
-                          .filter(keg => keg.id !=== this.state.selectedKeg.id)
+                          .filter(keg => keg.id !== this.state.selectedKeg.id)
                           .concat(replacedKeg);
     this.setState({
       kegList: editedKegList
