@@ -111,7 +111,9 @@ class KegControl extends React.Component {
 
   handleBuyingKeg = (id) => {
     const purchasedKeg = this.state.kegList.filter(keg => keg.id === id)[0];
-    purchasedKeg.quantity -= 1;
+    if (purchasedKeg.quantity > 0) {
+      purchasedKeg.quantity -= 1
+    }
     const editedKegList = this.state.kegList
                           .filter(keg => keg.id !== this.state.selectedKeg.id)
                           .concat(purchasedKeg);
