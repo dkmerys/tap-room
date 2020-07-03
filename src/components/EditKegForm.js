@@ -7,6 +7,24 @@ function EditKegForm (props) {
 
   function handleEditKegFormSubmission(event) {
     event.preventDefault();
+    if (event.target.name.value === "") {
+      event.target.name.value = keg.name
+    }
+    if (event.target.brewery.value === "") {
+      event.target.brewery.value = keg.brewery
+    }
+    if (event.target.description.value === "") {
+      event.target.description.value = keg.description
+    }
+    if (event.target.abv.value === "") {
+      event.target.abv.value = keg.abv
+    }
+    if (event.target.price.value === "") {
+      event.target.price.value = keg.price
+    }
+    if (event.target.quantity.value === "") {
+      event.target.quantity.value = keg.quantity
+    }
     props.onEditKeg({
       name: event.target.name.value,
       brewery: event.target.brewery.value,

@@ -14,6 +14,7 @@ function ReusableForm(props) {
           type="text"
           name="brewery"
           placeholder="Brewery"/>
+          <br />
         <textarea
           type="text"
           name="description"
