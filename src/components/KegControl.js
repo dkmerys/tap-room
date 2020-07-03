@@ -1,4 +1,5 @@
 import React from 'react';
+import KegList from './KegList';
 
 class KegControl extends React.Component {
   constructor(props) {
@@ -132,8 +133,36 @@ class KegControl extends React.Component {
     let currentlyVisibleState = null;
     let buttonText = null;
 
-    if (this.state.selectedItem !== null) {
+    if (this.state.editing) {
+      currentlyVisibleState = <EditKegForm
+                              keg = {this.state.selectedKeg}
+                              onEditKeg = {this.handleEditingKegInList} />
+      buttonText = "Return to Keg List;"
+    } else if (this.state.selectedKeg !== null) {
+      currentlyVisibleState = <KegDetail
+                              keg = {this.state.selectedKeg}
+                              onClickingDelete = {this.handleDeletingKeg}
+                              onClickingEdit = {this.handleEditClick}
+                              onClickingBuy = {this.handleBuyingKeg}
+                              onClickingReplace = {this.handleReplacingKeg} />
+      buttonText = "Return To Keg List;"
+    } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewKegForm
+                              onNewKegCreation = {this.handleAddingNewKegToList} />
+      buttonText = "Return To Keg List";
+    } else {
+      currentlyVisibleState = <KegList
+                              kegList = {this.state.kegList}
+                              onKegSelection = {this.handleChangingSelectedKeg} />;
+      buttonText = "Add Keg"
     }
+    return(
+      <React.Fragment>
+        {currentlyVisibleState}
+        <button onClick={this.handleClick}>{buttonText}</button>
+      </React.Fragment>
+    );
   }
 }
+
+export default KegControl;
