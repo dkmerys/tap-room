@@ -34,6 +34,7 @@ function ReusableForm(props) {
           name="quantity"
           placeholder="Pints Remaining in Keg"/>
         <br />
+        <button type='submit'>{props.buttonText}</button>
       </form>
     </React.Fragment>
   );
